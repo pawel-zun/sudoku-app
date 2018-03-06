@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import sudoku from 'sudoku-umd';
 import Board from './Board';
+import Message from './Message';
 import './App.css';
 
 class App extends Component {
@@ -10,8 +11,13 @@ class App extends Component {
       initialBoard: [],
       gameBoard: [],
       isDummy: true,
+      message: '',
     }
     this.startGame = this.startGame.bind(this);
+    this.restartGame = this.restartGame.bind(this);
+    this.checkSolution = this.checkSolution.bind(this);
+    this.printCheckSolution = this.printCheckSolution.bind(this);
+    this.showSolution = this.showSolution.bind(this);
     this.getPlayersNumber = this.getPlayersNumber.bind(this);
   }
   componentWillMount() {
@@ -29,6 +35,7 @@ class App extends Component {
     playersBoard[id] = number;
     this.setState({
       gameBoard: playersBoard,
+      message: '',
     });
   }
   startGame() {
@@ -41,13 +48,40 @@ class App extends Component {
     });
   }
   restartGame() {
-
+    const restartedBoard = this.state.initialBoard;
+    this.setState({
+      gameBoard: restartedBoard,
+    });
   }
   checkSolution() {
-
+    const playersSolution = this.state.gameBoard.join('');
+    return sudoku.solve(playersSolution);
+  }
+  printCheckSolution() {
+    const result = this.checkSolution();
+    let message = '';
+    if (result) {
+      message = 'So far so good!'
+    } else {
+      message = 'Some numbers are incorrect!'
+    }
+    //console.log(message);
+    this.setState({
+      message,
+    });
   }
   showSolution() {
-
+    const result = this.checkSolution();
+    if (result) {
+      const solvedSudoku = result.split('');
+      this.setState({
+        gameBoard: solvedSudoku,
+      });
+    } else {
+      this.setState({
+        message: 'Unfortunately this game cannot be solved. Try to put in different numbers :)'
+      });
+    }
   }
   render() {
     return (
@@ -62,9 +96,10 @@ class App extends Component {
         <div className="buttons">
           <button onClick={this.startGame}>New Game</button>
           <button onClick={this.restartGame}>Restart</button>
-          <button onClick={this.checkSolution}>Check</button>
+          <button onClick={this.printCheckSolution}>Check</button>
           <button onClick={this.showSolution}>Solve</button>
         </div>
+        <Message show={this.state.message}/>
       </div>
     );
   }
