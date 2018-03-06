@@ -5,3 +5,26 @@
 .buttons {
   text-align: center;
 }
+
+.buttons button {
+  color: #273049;
+  background-color: #EAE5D8;
+  border: 0;
+  border-radius: 25px;
+  margin: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 16px;
+  padding: 10px 25px;
+  min-width: 120px;
+  max-width: 150px;
+}
+
+.buttons button:hover {
+  background-color: #9FA19A;
+  cursor: pointer;
+}
+
+.buttons button:focus {
+  outline: none;
+}

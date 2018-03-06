@@ -10,6 +10,7 @@ const Tile = (props) => {
       value={props.tile}
       onChange={props.handleNumber}
       disabled={props.disabled}
+      className={'Tile'}
     />
   );
 }

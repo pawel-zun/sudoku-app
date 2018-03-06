@@ -32,6 +32,10 @@ class App extends Component {
   }
   getPlayersNumber(id, number) {
     const playersBoard = this.state.gameBoard.slice();
+    // Prevent empty numbers
+    if (number === '') {
+      number = '.'
+    }
     playersBoard[id] = number;
     this.setState({
       gameBoard: playersBoard,
@@ -39,18 +43,20 @@ class App extends Component {
     });
   }
   startGame() {
-    const stringOfBoard = sudoku.generate('easy');
+    const stringOfBoard = sudoku.generate('medium');
     const boardToSolve = stringOfBoard.split('');
     this.setState({
       initialBoard: boardToSolve,
       gameBoard: boardToSolve,
       isDummy: false,
+      message: '',
     });
   }
   restartGame() {
     const restartedBoard = this.state.initialBoard;
     this.setState({
       gameBoard: restartedBoard,
+      message: '',
     });
   }
   checkSolution() {

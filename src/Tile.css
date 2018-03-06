@@ -1,0 +1,36 @@
+.Tile {
+  box-sizing: border-box;
+  font-size: 24px;
+  color: #D93429;
+  text-align: center;
+  border: 1px solid #89443E;
+  width: 50px;
+  height: 50px;
+}
+
+.Tile:focus {
+  outline: none;
+  background-color: #D93429;
+  color: #fff;
+}
+
+.Tile:disabled {
+  color: #89443E;
+  background-color: #D5C4AB;
+}
+
+.Tile:nth-of-type(3n) {
+  border-right: 2px solid #89443E;
+}
+
+.Tile:nth-of-type(27n + 1),
+.Tile:nth-of-type(27n + 2), 
+.Tile:nth-of-type(27n + 3),
+.Tile:nth-of-type(27n + 4),
+.Tile:nth-of-type(27n + 5),
+.Tile:nth-of-type(27n + 6),
+.Tile:nth-of-type(27n + 7),
+.Tile:nth-of-type(27n + 8),
+.Tile:nth-of-type(27n + 9) {
+    border-top: 2px solid #89443E;
+}
